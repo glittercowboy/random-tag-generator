@@ -1,51 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TÂCHES TAG SELECTOR</title>
-  <!-- Modern Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
-  <!-- Font Awesome for copy icon -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div class="container">
-    <h1>TÂCHES TAG SELECTOR</h1>
-
-    <!-- Genre Section -->
-    <div class="section">
-      <h2>Genre</h2>
-      <div class="slider-group">
-        <label for="genreCount">Tags Count: <span id="genreCountDisplay">5</span></label>
-        <input type="range" id="genreCount" name="genreCount" min="1" max="10" value="5" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TÂCHES TAG SELECTOR</title>
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="main-container">
+      <!-- Final Prompt Display -->
+      <div id="finalPromptContainer" class="final-prompt-container">
+        <span id="finalPrompt" class="final-prompt">
+          Your final prompt will appear here
+        </span>
+        <span id="copyPrompt" class="copy-icon">
+          <i class="fas fa-copy"></i>
+        </span>
       </div>
-      <button id="genreButton">Get Random Genres</button>
-      <div class="spinner" id="genreSpinner"></div>
-      <!-- Results container with copy icon -->
-      <div class="results-container" id="genreResultsContainer">
-        <div class="results" id="genreResults"></div>
-        <span class="copy-icon" id="genreCopyIcon" title="Copy to clipboard">&#xf0ea;</span>
+      <!-- Tags Grid (always 9 tags) -->
+      <div id="tagsContainer" class="tags-container">
+        <!-- 9 tag items will be injected here -->
       </div>
-    </div>
-
-    <!-- Adjective Section -->
-    <div class="section">
-      <h2>Adjective</h2>
-      <div class="slider-group">
-        <label for="adjectiveCount">Tags Count: <span id="adjectiveCountDisplay">5</span></label>
-        <input type="range" id="adjectiveCount" name="adjectiveCount" min="1" max="10" value="5" />
-      </div>
-      <button id="adjectiveButton">Get Random Adjectives</button>
-      <div class="spinner" id="adjectiveSpinner"></div>
-      <!-- Results container with copy icon -->
-      <div class="results-container" id="adjectiveResultsContainer">
-        <div class="results" id="adjectiveResults"></div>
-        <span class="copy-icon" id="adjectiveCopyIcon" title="Copy to clipboard">&#xf0ea;</span>
+      <!-- Controls (Generate button only) -->
+      <div class="controls">
+        <button id="generateBtn" class="generate-btn">Generate</button>
       </div>
     </div>
-  </div>
-  <script src="app.js"></script>
-</body>
+    <script src="app.js"></script>
+  </body>
 </html>

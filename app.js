@@ -1,134 +1,174 @@
-// --- Define Your Tag Lists ---
-// For Genre, we use this list:
-const genreTagsString = "Soul, R&B, Neo-soul, Jazz, Blues, Acoustic, Folk, Singer-songwriter, Ballad, Gospel, Downtempo, Ambient, Chillout, Lounge, Organic House, Soulful House, Disco, Latin, Afrobeat, African, World, Classical, Baroque, Renaissance, Opera, Chamber Music, Orchestral, Instrumental, Minimal, Bluegrass, Americana, Roots, Country, Rumba, Samba, Bossa Nova, Mambo, Calypso, Reggae, Caribbean, Latin Jazz, Soul Jazz, Cool Jazz, Swing, Big Band, Funk, Soul Funk, Jazz Funk, Smooth Jazz, Vocal Jazz, Folk Revival, Acoustic Folk, Indie Folk, Electroacoustic, Dream Pop, Quiet Storm, New Age, Meditative, Chant, Devotional, Spiritual, Ambient Pop, Instrumental Pop, Soft Rock, Mellow Rock, Easy Listening, Café Music, Lounge Pop, Contemporary Classical, Modern Classical, Piano Pop, Orchestral Pop, Chamber Pop, Baroque Pop, Retro Pop, Traditional Folk, Soul Blues, Jazz Ballad, Folk Ballad, Acoustic Blues, Urban Blues, Country Blues, Spiritual Blues, World Jazz, Latin Soul, Afro Soul, Global, Meditative Folk, Organic Jazz, Acoustic Soul, Lush Pop, Ambient Jazz, Minimal Jazz, Classic Rock, Soft Soul, Retro Soul, Nu Jazz, Chamber Jazz, Boogaloo, World Fusion, Acid Jazz, Neoclassical, Folk Jazz, Country Soul, Acoustic Pop, Indie Folk Rock, Acoustic Rock, Country Jazz, Blues Rock, Soul Rock, Roots Rock, Chamber Folk, Urban Soul, Smooth R&B, Soulful Folk, Ambient Folk, Electric Blues, Gypsy Jazz, Cinematic Soul, Ethereal Jazz, Meditative Jazz, Neo-Folk, Blues Ballad, Vintage Soul, Chamber Soul, Countryside Soul, Intimate Pop, Indie Acoustic, Sunset Jazz, Bluegrass Gospel, Southern Soul, Soulful Rumba, Calypso Soul, Tropical Soul, Island Soul, Meditative Pop, Chamber R&B, Soulful Swing, Café Jazz, Bohemian Soul, Acoustic Chamber, Lounge Jazz, Organic R&B, Rustic Blues, Earthy Jazz, Contemporary Ballad, Harmonic Pop, Jazz Fusion, Soulful Groove, Gentle Rock, Acoustic Fusion, Reflective Blues, Quiet Soul, Subtle R&B, Warm Gospel, Uplifting Gospel, Spiritual Jazz, Mystic Soul, Retro Blues, Antique Jazz, Old-Time Gospel, Heritage Folk, Intimate Blues, Intimate Jazz, Quiet Jazz, Dreamy Soul, Hushed Folk, Mellow Blues, Warm Blues, Gentle Gospel, Serene Folk, Poetic Jazz, Emotive Blues, Lyrical Folk, Tender Rock, Acoustic Ballad, Evening Jazz, Nighttime Soul, Sunrise Folk, Morning Blues, Urban Jazz, City Soul, Street Jazz, Backroad Blues, Rustic Soul, Country Gospel, World Folk, Ethnic Soul, Eclectic Jazz, Lounge Soul, Soul Ballad, Meditative Rock, Ambient Blues, Ethereal Folk, Harmonic Soul, Acoustic Groove, Folksy Ballad, Warm Rumba, Mellow R&B, Vintage Jazz";
+// --- Define Your Genre Tags List ---
+const genreTagsString =
+  "Soul, R&B, Neo-soul, Jazz, Blues, Acoustic, Folk, Singer-songwriter, Ballad, Gospel, Downtempo, Ambient, Chillout, Lounge, Organic House, Soulful House, Disco, Latin, Afrobeat, African, World, Classical, Baroque, Renaissance, Opera, Chamber Music, Orchestral, Instrumental, Minimal, Bluegrass, Americana, Roots, Country, Rumba, Samba, Bossa Nova, Mambo, Calypso, Reggae, Caribbean, Latin Jazz, Soul Jazz, Cool Jazz, Swing, Big Band, Funk, Soul Funk, Jazz Funk, Smooth Jazz, Vocal Jazz, Folk Revival, Acoustic Folk, Indie Folk, Electroacoustic, Dream Pop, Quiet Storm, New Age, Meditative, Chant, Devotional, Spiritual, Ambient Pop, Instrumental Pop, Soft Rock, Mellow Rock, Easy Listening, Café Music, Lounge Pop, Contemporary Classical, Modern Classical, Piano Pop, Orchestral Pop, Chamber Pop, Baroque Pop, Retro Pop, Traditional Folk, Soul Blues, Jazz Ballad, Folk Ballad, Acoustic Blues, Urban Blues, Country Blues, Spiritual Blues, World Jazz, Latin Soul, Afro Soul, Global, Meditative Folk, Organic Jazz, Acoustic Soul, Lush Pop, Ambient Jazz, Minimal Jazz, Classic Rock, Soft Soul, Retro Soul, Nu Jazz, Chamber Jazz, Boogaloo, World Fusion, Delta Blues, Chicago Blues, Piedmont Blues, Country Blues, Celtic Folk, Appalachian Folk, British Folk, Traditional Gospel, Southern Gospel, Hard Bop, Cool Jazz, West Coast Jazz, Dixieland, New Orleans Jazz, Post-Bop, Modal Jazz, Free Jazz, Texas Blues, Jump Blues, Classic R&B, Folk Rock, Southern Rock, Jam Band, Alt-Country, Traditional Country, Western Swing, Jazz Pop, Folk Pop, Chillwave, Worldbeat, Mediterranean Pop, Indian Classical, Hindustani Classical, Carnatic, Sufi, Chanson, Andean, Cumbia, Qawwali, Fado, Nueva Canción, Bachata, Ska, Rocksteady, Dub, Skiffle, Highlife, Mbalax, Soukous, Gnawa, Tropicalia, MPB, Samba Rock, Forró, Klezmer, Balkan Folk, Indie Rock, Alternative Rock, Afro-Cuban Jazz, Salsa, Bebop, Rockabilly, Doo-Wop, Gospel Blues, Swamp Blues, West Coast Blues, Boogie-Woogie, Ragtime, Contemporary Jazz, Swamp Rock, Swing Revival, Barbershop, New Orleans Blues, Memphis Soul, Philadelphia Soul, Ethio-Jazz, Semba, Morna, Kizomba, Swamp Pop, Northern Soul, Contemporary Blues, Stride, Outlaw Country, Scandinavian Folk, Mediterranean Folk, Balearic, Filmi, Ghazal, Lo-Fi, Psychedelic Soul, Choro, Marabi, Kwela, Isicathamiya, Mbube, Juju, Cha-Cha-Cha, Ranchera, Mariachi";
 const genreTags = genreTagsString.split(",").map(tag => tag.trim());
 
-// For Adjective, we use this list:
-const adjectiveTagsString = "nostalgic, mellow, melancholic, lush, bittersweet, gentle, dreamy, expressive, spiritual, relaxing, warm, organic, soulful, evocative, reflective, serene, emotional, tender, soft, ambient, vintage, acoustic, natural, rich, smooth, calming, introspective, poetic, heartfelt, rhythmic, elegant, understated, classic, timeless, pristine, inviting, raw, genuine, pure, simple, humble, balanced, harmonious, subtle, sincere, rustic, idyllic, tranquil, peaceful, soothing, meditative, blissful, quiet, earthy, vibrant, delicate, pensive, inspiring, passionate, healing, kind, ruminative, mild, flowing, graceful, entrancing, intimate, unpretentious, thoughtful, calm, subdued, languid, slow, measured, languorous, warmhearted, ambling, floating, sweet, harmonic, velvety, plush, relaxed, content, enraptured, modulated, musical, stirring, eloquent, resonant, scenic, sunlit, silken, drowsy, radiant, quaint, hushed, clear, glassy, muted, fluid, transparent, deep, dignified, enchanting, rapt, moving, dynamic, evolving, enduring, persistent, open, creative, original, inspired, artistic, imaginative, joyful, spirited, sparkling, opulent, sumptuous, creamy, intricate, layered, textured, vivid, haunting, moody, spacious, solemn, reverent, modest, candid, earnest, unadorned, refined, polished, cultured, urbane, laid-back, unassuming, restful, placid, pacific, halcyon, comforting, caressing, embracing, nurturing, secure, assured, resilient, balmy, summery, autumnal, golden, amber, coppery, silvery, beaming, incandescent, lustrous, complex, nuanced, sophisticated, wavy, sinuous, undulating, meandering, drifting, ephemeral, fleeting, transient, elusive, whispered, murmuring, veiled, shadowed, dimmed, diffused, blurred, smoothed, surreal, otherworldly, mysterious, obscure, latent, silent, still, easygoing, casual, unhurried, leisurely, staid, deliberate, methodical, steady, syncopated, reverberant, echoing, cascading, rolling, continuous, sustained, lingering, unchanging, steadfast, resolute, determined, focused, centered, even, temperate, fine, immaculate, faultless, seamless, coherent, compelling, engaging, fascinating, intriguing, stimulating, allusive, suggestive, emblematic, mythic, storied, legendary, iconic, cordial, pastel, floral, breezy, softhearted, caring, amiable, gracious, benevolent, velveteen, decadent, gilded, fervent, ardent, jazzy, bluesy, mesmerizing, sentimental, affectionate, pastoral, wistful, mournful, heartwarming, charming, glistening, effortless, softened, silky, composed, loving, sultry, mystical, sacred, divine, exquisite, sonorous, heartening, uplifting, endearing, lovely, bright, romantic, memorable, delightful, familiar, sensitive, personal, reminiscent, retro, unfiltered, approachable, melodic, lyrical, soaring, elegiac, contemplative, dreamlike, heavenly, restrained, optimistic, cozy, homey, resounding, dulcet, cathartic, restorative, radiating, shimmering, pulsing";
-const adjectiveTags = adjectiveTagsString.split(",").map(tag => tag.trim());
-
-// --- Helper Functions ---
-function getRandomTagFromList(tags) {
-  const randomIndex = Math.floor(Math.random() * tags.length);
-  return tags[randomIndex];
+/* Utility: Return a random tag from genreTags excluding any in usedTags */
+function getUniqueRandomTag(usedTags) {
+  const pool = genreTags.filter(tag => !usedTags.includes(tag));
+  if (pool.length === 0) return null;
+  return pool[Math.floor(Math.random() * pool.length)];
 }
 
-// A generic animate function that “rolls” a tag on a given spinner element
-function animateRandomSelection(duration, spinner, tags, callback) {
-  let elapsed = 0;
-  const intervalTime = 100; // update every 100ms
-  spinner.textContent = "";
-
-  const interval = setInterval(() => {
-    spinner.textContent = getRandomTagFromList(tags);
-    elapsed += intervalTime;
-
-    if (elapsed >= duration) {
-      clearInterval(interval);
-      callback(spinner.textContent);
-    }
-  }, intervalTime);
+/* Utility: Return an array of 'count' unique random tags excluding any in usedTags */
+function getUniqueRandomTags(count, usedTags) {
+  const pool = genreTags.filter(tag => !usedTags.includes(tag));
+  const result = [];
+  for (let i = 0; i < count; i++) {
+    if (pool.length === 0) break;
+    const index = Math.floor(Math.random() * pool.length);
+    result.push(pool[index]);
+    pool.splice(index, 1);
+  }
+  return result;
 }
 
-// Generic function to select tags sequentially
-function selectTagsSequentially(count, spinner, results, tags) {
-  if (count <= 0) return;
+/* Create a tag item element with given text */
+function createTagItemWithText(text) {
+  const tagItem = document.createElement("div");
+  tagItem.className = "tag-item";
 
-  animateRandomSelection(1000, spinner, tags, (finalTag) => {
-    // Append the final tag to the results area (separated by commas)
-    if (results.textContent === "") {
-      results.textContent = finalTag;
+  const tagText = document.createElement("span");
+  tagText.className = "tag-text";
+  tagText.textContent = text;
+
+  const lockIcon = document.createElement("span");
+  lockIcon.className = "lock-icon";
+  lockIcon.innerHTML = '<i class="fas fa-lock-open"></i>';
+  lockIcon.addEventListener("click", () => {
+    tagItem.classList.toggle("locked");
+    const iconElem = lockIcon.querySelector("i");
+    if (tagItem.classList.contains("locked")) {
+      iconElem.classList.remove("fa-lock-open");
+      iconElem.classList.add("fa-lock");
     } else {
-      results.textContent += ", " + finalTag;
+      iconElem.classList.remove("fa-lock");
+      iconElem.classList.add("fa-lock-open");
     }
-    // Pause briefly before the next roll
-    setTimeout(() => {
-      selectTagsSequentially(count - 1, spinner, results, tags);
-    }, 500);
+    // Call updateFinalPrompt immediately when lock status changes
+    const finalPromptElem = document.getElementById("finalPrompt");
+    const lockedTags = [];
+    document.querySelectorAll(".tag-item.locked").forEach(item => {
+      lockedTags.push(item.querySelector(".tag-text").textContent);
+    });
+    finalPromptElem.textContent = lockedTags.join(", ") || "Your final prompt will appear here";
   });
+
+  tagItem.appendChild(tagText);
+  tagItem.appendChild(lockIcon);
+  return tagItem;
 }
 
-// --- Event Listeners ---
 document.addEventListener("DOMContentLoaded", () => {
-  // Genre Slider Value Update
-  const genreSlider = document.getElementById("genreCount");
-  const genreDisplay = document.getElementById("genreCountDisplay");
-  genreSlider.addEventListener("input", () => {
-    genreDisplay.textContent = genreSlider.value;
-  });
+  const generateBtn = document.getElementById("generateBtn");
+  const tagsContainer = document.getElementById("tagsContainer");
+  const finalPromptElem = document.getElementById("finalPrompt");
+  const copyPrompt = document.getElementById("copyPrompt");
 
-  // Adjective Slider Value Update
-  const adjectiveSlider = document.getElementById("adjectiveCount");
-  const adjectiveDisplay = document.getElementById("adjectiveCountDisplay");
-  adjectiveSlider.addEventListener("input", () => {
-    adjectiveDisplay.textContent = adjectiveSlider.value;
-  });
+  // Ensure there are exactly 9 tag items.
+  // If 'initial' is true (only on first load), fill with 9 unique tags.
+  function updateTagItems(initial = false) {
+    const desiredCount = 9;
+    const currentItems = tagsContainer.querySelectorAll(".tag-item");
+    const currentCount = currentItems.length;
+    if (currentCount < desiredCount) {
+      if (initial && currentCount === 0) {
+        const initialTags = getUniqueRandomTags(desiredCount, []);
+        for (let i = 0; i < desiredCount; i++) {
+          const tagItem = createTagItemWithText(initialTags[i]);
+          tagsContainer.appendChild(tagItem);
+        }
+      } else {
+        // For any missing cell, choose a tag not already used in the container.
+        const used = Array.from(tagsContainer.querySelectorAll(".tag-text")).map(
+          el => el.textContent
+        );
+        for (let i = currentCount; i < desiredCount; i++) {
+          const uniqueTag = getUniqueRandomTag(used);
+          used.push(uniqueTag);
+          const tagItem = createTagItemWithText(uniqueTag);
+          tagsContainer.appendChild(tagItem);
+        }
+      }
+    } else if (currentCount > desiredCount) {
+      for (let i = currentCount - 1; i >= desiredCount; i--) {
+        tagsContainer.removeChild(currentItems[i]);
+      }
+    }
+    updateFinalPrompt();
+  }
 
-  // Copy to clipboard for Genre section via the copy icon
-  document.getElementById("genreCopyIcon").addEventListener("click", () => {
-    const resultsElem = document.getElementById("genreResults");
-    const container = document.getElementById("genreResultsContainer");
-    const text = resultsElem.textContent;
-    if (text.trim() !== "") {
-      navigator.clipboard.writeText(text)
+  /* Spin an individual tag item.
+     During the spin, the text changes randomly.
+     At the end, the finalValue (which is predetermined and unique) is assigned.
+  */
+  function spinTag(tagItem, finalValue, duration = 800, intervalTime = 50) {
+    return new Promise((resolve) => {
+      const tagText = tagItem.querySelector(".tag-text");
+      tagItem.classList.add("spinning");
+      let elapsed = 0;
+      const interval = setInterval(() => {
+        // During spinning, show any random tag (duplicates allowed)
+        tagText.textContent = genreTags[Math.floor(Math.random() * genreTags.length)];
+        elapsed += intervalTime;
+        if (elapsed >= duration) {
+          clearInterval(interval);
+          tagItem.classList.remove("spinning");
+          tagText.textContent = finalValue;
+          resolve();
+        }
+      }, intervalTime);
+    });
+  }
+
+  /* When "Generate" is clicked, update unlocked cells with new unique tags.
+     All unlocked cells spin concurrently and then are assigned a unique final value.
+  */
+  async function generateTags() {
+    // Ensure 9 cells exist.
+    updateTagItems();
+    // Get an array of locked tag texts.
+    const lockedTags = Array.from(document.querySelectorAll(".tag-item.locked"))
+      .map(item => item.querySelector(".tag-text").textContent);
+    // Get all unlocked cells.
+    const unlockedCells = Array.from(document.querySelectorAll(".tag-item:not(.locked)"));
+    // Get unique new tags from the available pool (exclude locked ones).
+    const newTags = getUniqueRandomTags(unlockedCells.length, lockedTags);
+    const spinPromises = [];
+    unlockedCells.forEach((cell, index) => {
+      spinPromises.push(spinTag(cell, newTags[index]));
+    });
+    await Promise.all(spinPromises);
+    updateFinalPrompt();
+  }
+
+  /* Update the final prompt display with locked tags separated by commas */
+  function updateFinalPrompt() {
+    const lockedTags = [];
+    const tagItems = document.querySelectorAll(".tag-item.locked");
+    tagItems.forEach(item => {
+      const text = item.querySelector(".tag-text").textContent;
+      lockedTags.push(text);
+    });
+    finalPromptElem.textContent =
+      lockedTags.join(", ") || "Your final prompt will appear here";
+  }
+
+  /* Copy final prompt text to clipboard when the copy icon is clicked */
+  copyPrompt.addEventListener("click", () => {
+    const textToCopy = finalPromptElem.textContent;
+    if (textToCopy && textToCopy !== "Your final prompt will appear here") {
+      navigator.clipboard.writeText(textToCopy)
         .then(() => {
-          // Animate the entire container
-          container.classList.add("copied");
-          setTimeout(() => {
-            container.classList.remove("copied");
-          }, 300);
+          copyPrompt.style.color = "green";
+          setTimeout(() => { copyPrompt.style.color = "#4a90e2"; }, 1000);
         })
-        .catch(err => {
-          console.error("Failed to copy:", err);
-        });
+        .catch(err => console.error("Copy failed:", err));
     }
   });
 
-  // Copy to clipboard for Adjective section via the copy icon
-  document.getElementById("adjectiveCopyIcon").addEventListener("click", () => {
-    const resultsElem = document.getElementById("adjectiveResults");
-    const container = document.getElementById("adjectiveResultsContainer");
-    const text = resultsElem.textContent;
-    if (text.trim() !== "") {
-      navigator.clipboard.writeText(text)
-        .then(() => {
-          // Animate the entire container
-          container.classList.add("copied");
-          setTimeout(() => {
-            container.classList.remove("copied");
-          }, 300);
-        })
-        .catch(err => {
-          console.error("Failed to copy:", err);
-        });
-    }
-  });
+  generateBtn.addEventListener("click", generateTags);
 
-  // Genre Section - Generate Tags
-  const genreButton = document.getElementById("genreButton");
-  genreButton.addEventListener("click", () => {
-    const count = parseInt(document.getElementById("genreCount").value);
-    const spinner = document.getElementById("genreSpinner");
-    const results = document.getElementById("genreResults");
-
-    // Clear previous results/spinner
-    results.textContent = "";
-    spinner.textContent = "";
-
-    selectTagsSequentially(count, spinner, results, genreTags);
-  });
-
-  // Adjective Section - Generate Tags
-  const adjectiveButton = document.getElementById("adjectiveButton");
-  adjectiveButton.addEventListener("click", () => {
-    const count = parseInt(document.getElementById("adjectiveCount").value);
-    const spinner = document.getElementById("adjectiveSpinner");
-    const results = document.getElementById("adjectiveResults");
-
-    // Clear previous results/spinner
-    results.textContent = "";
-    spinner.textContent = "";
-
-    selectTagsSequentially(count, spinner, results, adjectiveTags);
-  });
+  // Initialize with 9 unique tags on page load.
+  updateTagItems(true);
 });
