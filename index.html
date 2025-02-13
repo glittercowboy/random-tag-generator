@@ -33,7 +33,22 @@
       </div>
       <!-- Controls (Generate button only) -->
       <div class="controls">
-        <button id="generateBtn" class="generate-btn">Spin</button>
+        <button id="generateBtn" class="generate-btn">Generate</button>
+        <a id="customTagsBtn" class="custom-tags-link">Add Custom Tags</a>
+      </div>
+    </div>
+
+    <!-- Custom Tags Modal -->
+    <div id="customTagsModal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>Add Custom Tags</h2>
+        <p>Paste your tags below, separated by commas.<br>You need at least 9 unique tags.</p>
+        <textarea id="customTagsInput" placeholder="Tag 1, Tag 2, Tag 3, ..."></textarea>
+        <div class="modal-buttons">
+          <button id="saveCustomTags" class="save-tags-btn">Save</button>
+          <a id="resetDefaultTags" class="reset-tags-link">Reset to default tags</a>
+        </div>
       </div>
     </div>
     <script src="app.js"></script>
