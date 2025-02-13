@@ -51,6 +51,21 @@ function selectTagsSequentially(count, spinner, results, tags) {
 
 // --- Event Listeners ---
 document.addEventListener("DOMContentLoaded", () => {
+  // Genre Slider Value Update
+  const genreSlider = document.getElementById("genreCount");
+  const genreDisplay = document.getElementById("genreCountDisplay");
+  genreSlider.addEventListener("input", () => {
+    genreDisplay.textContent = genreSlider.value;
+  });
+
+  // Adjective Slider Value Update
+  const adjectiveSlider = document.getElementById("adjectiveCount");
+  const adjectiveDisplay = document.getElementById("adjectiveCountDisplay");
+  adjectiveSlider.addEventListener("input", () => {
+    adjectiveDisplay.textContent = adjectiveSlider.value;
+  });
+
+
   // Genre Section
   const genreButton = document.getElementById("genreButton");
   genreButton.addEventListener("click", () => {
