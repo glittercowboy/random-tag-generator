@@ -116,10 +116,12 @@ body {
 .generate-btn {
   background: linear-gradient(135deg, #4a90e2, #357abd);
   border: none;
-  padding: 10px 20px;
+  padding: 10px 70px;
   color: #fff;
+  width: 250px;
+  height: 50px;
   border-radius: 25px;
-  font-size: 1em;
+  font-size: 1.2em;
   cursor: pointer;
   transition: transform 0.3s ease;
 }
