@@ -1,16 +1,49 @@
+/* Logo styles */
+.logo-container {
+  margin-bottom: 30px;
+  width: 150px;
+  height: auto;
+}
+
+.logo {
+  width: 100%;
+  height: auto;
+  display: none;
+}
+
+.light-logo {
+  display: block;
+}
+
+.dark-logo {
+  display: none;
+}
+
+body.dark-mode .light-logo {
+  display: none;
+}
+
+body.dark-mode .dark-logo {
+  display: block;
+}
+
 /* Reset & Base Styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 body {
   font-family: 'Roboto', sans-serif;
-  background: linear-gradient(135deg, #f3f3f3, #e7e7e7);
+  background: #f0f0f0; /* All 'white' => #f0f0f0 */
+  color: #1d1d1d;      /* All 'black' => #1d1d1d */
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  /* Smooth transitions for theme toggle */
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 /* Main container centered in viewport */
@@ -30,11 +63,13 @@ body {
   margin-bottom: 20px;
   text-align: center;
   font-size: 1.5em;
-  font-weight: bold;
-  color: #333;
-  border: 1px solid #eee;
+  font-weight: full;
+  border: 0px solid #ddd;
   border-radius: 10px;
+  color: #1d1d1d;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
+
 .final-prompt {
   display: inline;
   word-wrap: break-word;
@@ -44,8 +79,8 @@ body {
 .copy-icon {
   cursor: pointer;
   font-size: 1.2em;
-  color: #4a90e2;
-  transition: transform 0.2s ease;
+  color: #e6ac55; /* Accent color */
+  transition: transform 0.2s ease, color 0.3s ease;
   margin-left: 10px;
 }
 .copy-icon:hover {
@@ -68,17 +103,18 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #fafafa;
-  border: 1px solid #eee;
+  background: #f0f0f0;
+  border: 1px solid #ddd;
   border-radius: 30px;
   padding: 0 15px;
   font-size: 1em;
-  color: #333;
-  transition: background 0.3s ease;
+  color: #1d1d1d;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 .tag-item.locked {
-  background: #d0eaff;
+  background: #ffe2c4; /* Slight tint of #e6ac55 for locked items in light mode */
 }
+
 .tag-text {
   text-align: left;
   flex: 1;
@@ -87,10 +123,12 @@ body {
   white-space: nowrap;
   margin-right: 10px;
 }
+
+/* Lock icon (unlocked/locked) */
 .lock-icon {
   cursor: pointer;
   font-size: 1.2em;
-  color: #4a90e2;
+  color: #e6ac55; /* Accent color */
   transition: transform 0.2s ease;
 }
 .lock-icon:hover {
@@ -99,9 +137,15 @@ body {
 
 /* Spinning animation for tag text */
 @keyframes spinFade {
-  0% { opacity: 0.3; }
-  50% { opacity: 1; }
-  100% { opacity: 0.3; }
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
+  }
 }
 .spinning .tag-text {
   animation: spinFade 0.8s infinite;
@@ -116,10 +160,10 @@ body {
 }
 
 .generate-btn {
-  background: linear-gradient(135deg, #4a90e2, #357abd);
+  background: linear-gradient(135deg, #e6ac55, #ca8e46);
   border: none;
   padding: 10px 70px;
-  color: #fff;
+  color: #f0f0f0;
   width: 250px;
   height: 50px;
   border-radius: 25px;
@@ -134,16 +178,14 @@ body {
 }
 
 .custom-tags-link {
-  color: #4a90e2;
+  color: #1d1d1d;
   text-decoration: none;
   cursor: pointer;
   font-size: 0.9em;
   transition: color 0.3s ease;
 }
-
 .custom-tags-link:hover {
-  color: #357abd;
-  text-decoration: underline;
+  color: #d8954a; /* slightly darker accent */
 }
 
 /* Modal Styles */
@@ -160,15 +202,16 @@ body {
 }
 
 .modal-content {
-  background-color: #fff;
+  background-color: #f0f0f0;
   margin: 15% auto;
   padding: 30px;
   border-radius: 15px;
   width: 80%;
   max-width: 600px;
   position: relative;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .close-modal {
@@ -181,7 +224,6 @@ body {
   cursor: pointer;
   transition: color 0.3s ease;
 }
-
 .close-modal:hover {
   color: #333;
 }
@@ -196,6 +238,9 @@ body {
   font-size: 1em;
   resize: vertical;
   text-align: left;
+  color: #1d1d1d;
+  background: #f0f0f0;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .modal-buttons {
@@ -206,10 +251,10 @@ body {
 }
 
 .save-tags-btn {
-  background: linear-gradient(135deg, #4a90e2, #357abd);
+  background: linear-gradient(135deg, #e6ac55, #ca8e46);
   border: none;
   padding: 10px 70px;
-  color: #fff;
+  color: #f0f0f0;
   width: 250px;
   height: 50px;
   border-radius: 25px;
@@ -218,7 +263,6 @@ body {
   transition: transform 0.3s ease;
   margin-bottom: 5px;
 }
-
 .save-tags-btn:hover {
   transform: translateY(-2px);
 }
@@ -230,7 +274,91 @@ body {
   cursor: pointer;
   transition: color 0.3s ease;
 }
-
 .reset-tags-link:hover {
   color: #333;
+}
+
+/* Dark Mode Toggle Icon */
+.dark-mode-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  font-size: 1.8em;
+  color: #e6ac55; /* Accent color */
+  transition: transform 0.2s ease, color 0.3s ease;
+}
+.dark-mode-toggle:hover {
+  transform: scale(1.1);
+}
+
+/* ========== DARK MODE OVERRIDES ========== */
+body.dark-mode {
+  background: #1d1d1d;
+  color: #f0f0f0;
+}
+
+body.dark-mode .final-prompt-container {
+  border: none; /* remove border in dark mode */
+  color: #f0f0f0;
+}
+
+body.dark-mode .copy-icon {
+  color: #e6ac55;
+}
+
+body.dark-mode .tag-item {
+  background: #2d2d2d;
+  border: 1px solid #333; 
+  color: #f0f0f0;
+}
+body.dark-mode .tag-item.locked {
+  background: #3b2c1f; /* darker accent tint */
+}
+
+body.dark-mode .lock-icon {
+  color: #e6ac55;
+}
+
+body.dark-mode .generate-btn {
+  background: linear-gradient(135deg, #e6ac55, #ca8e46);
+  color: #f0f0f0;
+}
+
+body.dark-mode .custom-tags-link {
+  color: #e6ac55;
+}
+body.dark-mode .custom-tags-link:hover {
+  color: #d8954a;
+}
+
+body.dark-mode .modal-content {
+  background-color: #2d2d2d;
+  color: #f0f0f0;
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
+}
+
+body.dark-mode .close-modal {
+  color: #f0f0f0;
+}
+body.dark-mode .close-modal:hover {
+  color: #fff;
+}
+
+body.dark-mode #customTagsInput {
+  background: #3b3b3b;
+  border-color: #444;
+  color: #f0f0f0;
+}
+
+body.dark-mode .save-tags-btn {
+  background: linear-gradient(135deg, #e6ac55, #ca8e46);
+  color: #f0f0f0;
+}
+
+body.dark-mode .reset-tags-link {
+  color: #bbb;
+}
+body.dark-mode .reset-tags-link:hover {
+  color: #f0f0f0;
 }

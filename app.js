@@ -30,7 +30,6 @@ function getUniqueRandomTag(usedTags) {
 function getUniqueRandomTags(count, usedTags) {
   const result = [];
   const allUsedTags = [...usedTags];
-  
   for (let i = 0; i < count; i++) {
     const tag = getUniqueRandomTag(allUsedTags);
     result.push(tag);
@@ -62,12 +61,7 @@ function createTagItemWithText(text) {
       iconElem.classList.add("fa-lock-open");
     }
     // Call updateFinalPrompt immediately when lock status changes
-    const finalPromptElem = document.getElementById("finalPrompt");
-    const lockedTags = [];
-    document.querySelectorAll(".tag-item.locked").forEach(item => {
-      lockedTags.push(item.querySelector(".tag-text").textContent);
-    });
-    finalPromptElem.textContent = lockedTags.join(", ") || "Your final prompt will appear here";
+    updateFinalPrompt();
   });
 
   tagItem.appendChild(tagText);
@@ -75,10 +69,101 @@ function createTagItemWithText(text) {
   return tagItem;
 }
 
+/* Update the final prompt display with locked tags separated by commas */
+function updateFinalPrompt() {
+  const finalPromptElem = document.getElementById("finalPrompt");
+  const lockedTags = [];
+  document.querySelectorAll(".tag-item.locked").forEach(item => {
+    lockedTags.push(item.querySelector(".tag-text").textContent);
+  });
+  finalPromptElem.textContent =
+    lockedTags.join(", ") || "Your final prompt will appear here";
+}
+
+/* Spin an individual tag item and resolve with the finalValue */
+function spinTag(tagItem, finalValue, duration = 800, intervalTime = 50) {
+  return new Promise((resolve) => {
+    const tagText = tagItem.querySelector(".tag-text");
+    tagItem.classList.add("spinning");
+    let elapsed = 0;
+    const interval = setInterval(() => {
+      // During spinning, show any random tag (duplicates allowed)
+      tagText.textContent = currentGenreTags[Math.floor(Math.random() * currentGenreTags.length)];
+      elapsed += intervalTime;
+      if (elapsed >= duration) {
+        clearInterval(interval);
+        tagItem.classList.remove("spinning");
+        tagText.textContent = finalValue;
+        resolve();
+      }
+    }, intervalTime);
+  });
+}
+
+/* Generate new tags for all unlocked cells */
+async function generateTags() {
+  // Ensure 9 cells exist.
+  updateTagItems();
+  // Get an array of locked tag texts.
+  const lockedTags = Array.from(document.querySelectorAll(".tag-item.locked"))
+    .map(item => item.querySelector(".tag-text").textContent);
+  // Get all unlocked cells.
+  const unlockedCells = Array.from(document.querySelectorAll(".tag-item:not(.locked)"));
+  // Get unique new tags from the available pool (exclude locked ones).
+  const newTags = getUniqueRandomTags(unlockedCells.length, lockedTags);
+  // Add new tags to recently used set
+  newTags.forEach(tag => recentlyUsedTags.add(tag));
+  // Manage memory of recent tags
+  generationCount++;
+  if (generationCount >= MAX_MEMORY) {
+    generationCount = 0;
+    recentlyUsedTags.clear();
+  }
+  // Spin each unlocked cell, then update final prompt
+  const spinPromises = [];
+  unlockedCells.forEach((cell, index) => {
+    spinPromises.push(spinTag(cell, newTags[index]));
+  });
+  await Promise.all(spinPromises);
+  updateFinalPrompt();
+}
+
+/* Make sure we have exactly 9 tag items in the container */
+function updateTagItems(initial = false) {
+  const tagsContainer = document.getElementById("tagsContainer");
+  const desiredCount = 9;
+  const currentItems = tagsContainer.querySelectorAll(".tag-item");
+  const currentCount = currentItems.length;
+
+  if (currentCount < desiredCount) {
+    if (initial && currentCount === 0) {
+      const initialTags = getUniqueRandomTags(desiredCount, []);
+      for (let i = 0; i < desiredCount; i++) {
+        const tagItem = createTagItemWithText(initialTags[i]);
+        tagsContainer.appendChild(tagItem);
+      }
+    } else {
+      // For any missing cell, choose a tag not already used in the container.
+      const used = Array.from(currentItems).map(
+        item => item.querySelector(".tag-text").textContent
+      );
+      for (let i = currentCount; i < desiredCount; i++) {
+        const uniqueTag = getUniqueRandomTag(used);
+        used.push(uniqueTag);
+        const tagItem = createTagItemWithText(uniqueTag);
+        tagsContainer.appendChild(tagItem);
+      }
+    }
+  } else if (currentCount > desiredCount) {
+    for (let i = currentCount - 1; i >= desiredCount; i--) {
+      tagsContainer.removeChild(currentItems[i]);
+    }
+  }
+  updateFinalPrompt();
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const generateBtn = document.getElementById("generateBtn");
-  const tagsContainer = document.getElementById("tagsContainer");
-  const finalPromptElem = document.getElementById("finalPrompt");
   const copyPrompt = document.getElementById("copyPrompt");
   const customTagsBtn = document.getElementById("customTagsBtn");
   const customTagsModal = document.getElementById("customTagsModal");
@@ -86,6 +171,34 @@ document.addEventListener("DOMContentLoaded", () => {
   const customTagsInput = document.getElementById("customTagsInput");
   const saveCustomTags = document.getElementById("saveCustomTags");
   const resetDefaultTags = document.getElementById("resetDefaultTags");
+  const darkModeToggle = document.getElementById("darkModeToggle");
+
+  // Initialize with 9 unique tags on page load.
+  updateTagItems(true);
+
+  // Generate Button
+  generateBtn.addEventListener("click", generateTags);
+
+  // Copy final prompt text
+  copyPrompt.addEventListener("click", () => {
+    const finalPromptElem = document.getElementById("finalPrompt");
+    const textToCopy = finalPromptElem.textContent;
+    if (textToCopy && textToCopy !== "Your final prompt will appear here") {
+      navigator.clipboard.writeText(textToCopy)
+        .then(() => {
+          copyPrompt.style.color = "green";
+          setTimeout(() => {
+            copyPrompt.style.color = "#e6ac55";
+          }, 1000);
+        })
+        .catch(err => console.error("Copy failed:", err));
+    }
+  });
+
+  // Dark mode toggle
+  darkModeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+  });
 
   // Modal functionality
   customTagsBtn.addEventListener("click", () => {
@@ -117,11 +230,12 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Update the current tags and close modal
+    // Update the current tags
     currentGenreTags = uniqueTags;
     customTagsModal.style.display = "none";
 
-    // Reset the grid with new tags
+    // Reset the tag grid
+    const tagsContainer = document.getElementById("tagsContainer");
     while (tagsContainer.firstChild) {
       tagsContainer.removeChild(tagsContainer.firstChild);
     }
@@ -132,127 +246,12 @@ document.addEventListener("DOMContentLoaded", () => {
   resetDefaultTags.addEventListener("click", () => {
     currentGenreTags = defaultGenreTagsString.split(",").map(tag => tag.trim());
     customTagsInput.value = currentGenreTags.join(", ");
-    
-    // Reset the grid with default tags
+
+    const tagsContainer = document.getElementById("tagsContainer");
     while (tagsContainer.firstChild) {
       tagsContainer.removeChild(tagsContainer.firstChild);
     }
     updateTagItems(true);
     customTagsModal.style.display = "none";
   });
-
-  // Ensure there are exactly 9 tag items.
-  // If 'initial' is true (only on first load), fill with 9 unique tags.
-  function updateTagItems(initial = false) {
-    const desiredCount = 9;
-    const currentItems = tagsContainer.querySelectorAll(".tag-item");
-    const currentCount = currentItems.length;
-    if (currentCount < desiredCount) {
-      if (initial && currentCount === 0) {
-        const initialTags = getUniqueRandomTags(desiredCount, []);
-        for (let i = 0; i < desiredCount; i++) {
-          const tagItem = createTagItemWithText(initialTags[i]);
-          tagsContainer.appendChild(tagItem);
-        }
-      } else {
-        // For any missing cell, choose a tag not already used in the container.
-        const used = Array.from(tagsContainer.querySelectorAll(".tag-text")).map(
-          el => el.textContent
-        );
-        for (let i = currentCount; i < desiredCount; i++) {
-          const uniqueTag = getUniqueRandomTag(used);
-          used.push(uniqueTag);
-          const tagItem = createTagItemWithText(uniqueTag);
-          tagsContainer.appendChild(tagItem);
-        }
-      }
-    } else if (currentCount > desiredCount) {
-      for (let i = currentCount - 1; i >= desiredCount; i--) {
-        tagsContainer.removeChild(currentItems[i]);
-      }
-    }
-    updateFinalPrompt();
-  }
-
-  /* Spin an individual tag item.
-     During the spin, the text changes randomly.
-     At the end, the finalValue (which is predetermined and unique) is assigned.
-  */
-  function spinTag(tagItem, finalValue, duration = 800, intervalTime = 50) {
-    return new Promise((resolve) => {
-      const tagText = tagItem.querySelector(".tag-text");
-      tagItem.classList.add("spinning");
-      let elapsed = 0;
-      const interval = setInterval(() => {
-        // During spinning, show any random tag (duplicates allowed)
-        tagText.textContent = currentGenreTags[Math.floor(Math.random() * currentGenreTags.length)];
-        elapsed += intervalTime;
-        if (elapsed >= duration) {
-          clearInterval(interval);
-          tagItem.classList.remove("spinning");
-          tagText.textContent = finalValue;
-          resolve();
-        }
-      }, intervalTime);
-    });
-  }
-
-  /* When "Generate" is clicked, update unlocked cells with new unique tags.
-     All unlocked cells spin concurrently and then are assigned a unique final value.
-  */
-  async function generateTags() {
-    // Ensure 9 cells exist.
-    updateTagItems();
-    // Get an array of locked tag texts.
-    const lockedTags = Array.from(document.querySelectorAll(".tag-item.locked"))
-      .map(item => item.querySelector(".tag-text").textContent);
-    // Get all unlocked cells.
-    const unlockedCells = Array.from(document.querySelectorAll(".tag-item:not(.locked)"));
-    // Get unique new tags from the available pool (exclude locked ones).
-    const newTags = getUniqueRandomTags(unlockedCells.length, lockedTags);
-    // Add new tags to recently used set
-    newTags.forEach(tag => recentlyUsedTags.add(tag));
-    // Manage memory of recent tags
-    generationCount++;
-    if (generationCount >= MAX_MEMORY) {
-      generationCount = 0;
-      recentlyUsedTags.clear();
-    }
-    const spinPromises = [];
-    unlockedCells.forEach((cell, index) => {
-      spinPromises.push(spinTag(cell, newTags[index]));
-    });
-    await Promise.all(spinPromises);
-    updateFinalPrompt();
-  }
-
-  /* Update the final prompt display with locked tags separated by commas */
-  function updateFinalPrompt() {
-    const lockedTags = [];
-    const tagItems = document.querySelectorAll(".tag-item.locked");
-    tagItems.forEach(item => {
-      const text = item.querySelector(".tag-text").textContent;
-      lockedTags.push(text);
-    });
-    finalPromptElem.textContent =
-      lockedTags.join(", ") || "Your final prompt will appear here";
-  }
-
-  /* Copy final prompt text to clipboard when the copy icon is clicked */
-  copyPrompt.addEventListener("click", () => {
-    const textToCopy = finalPromptElem.textContent;
-    if (textToCopy && textToCopy !== "Your final prompt will appear here") {
-      navigator.clipboard.writeText(textToCopy)
-        .then(() => {
-          copyPrompt.style.color = "green";
-          setTimeout(() => { copyPrompt.style.color = "#4a90e2"; }, 1000);
-        })
-        .catch(err => console.error("Copy failed:", err));
-    }
-  });
-
-  generateBtn.addEventListener("click", generateTags);
-
-  // Initialize with 9 unique tags on page load.
-  updateTagItems(true);
 });
