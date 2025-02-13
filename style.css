@@ -1,0 +1,72 @@
+/* Basic styles for the page */
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  text-align: center;
+  background-color: #f0f0f0;
+}
+
+h1 {
+  color: #333;
+}
+
+/* Style for input and button */
+input,
+button {
+  padding: 12px;
+  margin: 10px;
+  font-size: 16px;
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+  border: 0;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+button:hover {
+  opacity: 0.85;
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+input:hover,
+input:focus {
+  opacity: 0.85;
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+/* Section styles */
+.section {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 600px;
+}
+
+.section h2 {
+  margin-top: 0;
+}
+
+/* Spinner styles */
+.spinner {
+  min-height: 40px;
+  line-height: 40px;
+  font-size: 2em;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+/* Results styles */
+.results {
+  min-height: 40px;
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 1.2em;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
