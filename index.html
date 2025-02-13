@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>TÂCHES TAG SELECTOR</title>
   <!-- Modern Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+  <!-- Font Awesome for copy icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
@@ -17,11 +19,15 @@
       <h2>Genre</h2>
       <div class="slider-group">
         <label for="genreCount">Tags Count: <span id="genreCountDisplay">5</span></label>
-        <input type="range" id="genreCount" name="genreCount" min="1" max="10" value="5">
+        <input type="range" id="genreCount" name="genreCount" min="1" max="10" value="5" />
       </div>
       <button id="genreButton">Get Random Genres</button>
       <div class="spinner" id="genreSpinner"></div>
-      <div class="results" id="genreResults"></div>
+      <!-- Results container with copy icon -->
+      <div class="results-container" id="genreResultsContainer">
+        <div class="results" id="genreResults"></div>
+        <span class="copy-icon" id="genreCopyIcon" title="Copy to clipboard">&#xf0ea;</span>
+      </div>
     </div>
 
     <!-- Adjective Section -->
@@ -29,11 +35,15 @@
       <h2>Adjective</h2>
       <div class="slider-group">
         <label for="adjectiveCount">Tags Count: <span id="adjectiveCountDisplay">5</span></label>
-        <input type="range" id="adjectiveCount" name="adjectiveCount" min="1" max="10" value="5">
+        <input type="range" id="adjectiveCount" name="adjectiveCount" min="1" max="10" value="5" />
       </div>
       <button id="adjectiveButton">Get Random Adjectives</button>
       <div class="spinner" id="adjectiveSpinner"></div>
-      <div class="results" id="adjectiveResults"></div>
+      <!-- Results container with copy icon -->
+      <div class="results-container" id="adjectiveResultsContainer">
+        <div class="results" id="adjectiveResults"></div>
+        <span class="copy-icon" id="adjectiveCopyIcon" title="Copy to clipboard">&#xf0ea;</span>
+      </div>
     </div>
   </div>
   <script src="app.js"></script>

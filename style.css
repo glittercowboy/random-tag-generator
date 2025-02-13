@@ -53,12 +53,14 @@ body {
 .slider-group {
   margin-bottom: 20px;
 }
+
 .slider-group label {
   display: block;
   font-size: 1em;
   color: #555;
   margin-bottom: 8px;
 }
+
 .slider-group input[type="range"] {
   -webkit-appearance: none;
   width: 80%;
@@ -82,6 +84,7 @@ body {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s ease;
 }
+
 .slider-group input[type="range"]::-webkit-slider-thumb:hover {
   transform: scale(1.1);
 }
@@ -98,12 +101,13 @@ button {
   transition: transform 0.3s ease, background 0.3s ease;
   margin-bottom: 20px;
 }
+
 button:hover {
   background: linear-gradient(135deg, #357ABD, #4A90E2);
   transform: translateY(-3px);
 }
 
-/* Spinner styling - ensure it always takes up 40px even when empty */
+/* Spinner styling - ensures it always takes up space */
 .spinner {
   margin: 20px 0;
   min-height: 40px;
@@ -111,14 +115,42 @@ button:hover {
   color: #333;
 }
 
-/* Results styling - reserve at least 60px of vertical space */
-.results {
+/* Results container using Flexbox for vertical alignment and spacing */
+.results-container {
+  display: flex;
+  align-items: center;               /* Vertically centers both the results and the icon */
+  justify-content: space-between;    /* Places the text to the left and the icon to the right */
   margin-top: 20px;
-  min-height: 60px;
+  min-height: 60px;                  /* Reserve space on page load */
   padding: 15px;
-  font-size: 1.2em;
   background: #fff;
   border: 1px solid #eee;
   border-radius: 8px;
+  transition: transform 0.2s ease;
+}
+
+/* Scale animation applied to the entire container */
+.results-container.copied {
+  transform: scale(1.02);
+}
+
+/* Style for the results box */
+.results {
+  font-size: 1.2em;
   color: #333;
+}
+
+/* Copy icon styles */
+.copy-icon {
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-size: 1.2em;
+  color: #4A90E2;
+}
+
+/* Hover effect for the copy icon */
+.copy-icon:hover {
+  transform: scale(1.02);
 }
