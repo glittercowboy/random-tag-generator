@@ -36,13 +36,12 @@ body.dark-mode .dark-logo {
 
 body {
   font-family: 'Roboto', sans-serif;
-  background: #f0f0f0; /* All 'white' => #f0f0f0 */
-  color: #1d1d1d;      /* All 'black' => #1d1d1d */
+  background: #f0f0f0;
+  color: #1d1d1d;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* Smooth transitions for theme toggle */
   transition: background 0.3s ease, color 0.3s ease;
 }
 
@@ -58,12 +57,11 @@ body {
 .final-prompt-container {
   max-width: 800px;
   width: 100%;
-  min-height: 100px;  /* Reserve space so the area doesn't jump */
+  min-height: 100px;
   padding: 10px;
   margin-bottom: 20px;
   text-align: center;
   font-size: 1.5em;
-  font-weight: full;
   border: 0px solid #ddd;
   border-radius: 10px;
   color: #1d1d1d;
@@ -79,7 +77,7 @@ body {
 .copy-icon {
   cursor: pointer;
   font-size: 1.2em;
-  color: #e6ac55; /* Accent color */
+  color: #e6ac55;
   transition: transform 0.2s ease, color 0.3s ease;
   margin-left: 10px;
 }
@@ -112,7 +110,7 @@ body {
   transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 .tag-item.locked {
-  background: #ffe2c4; /* Slight tint of #e6ac55 for locked items in light mode */
+  background: #ffe2c4;
 }
 
 .tag-text {
@@ -124,11 +122,11 @@ body {
   margin-right: 10px;
 }
 
-/* Lock icon (unlocked/locked) */
+/* Lock icon styling */
 .lock-icon {
   cursor: pointer;
   font-size: 1.2em;
-  color: #e6ac55; /* Accent color */
+  color: #e6ac55;
   transition: transform 0.2s ease;
 }
 .lock-icon:hover {
@@ -137,15 +135,9 @@ body {
 
 /* Spinning animation for tag text */
 @keyframes spinFade {
-  0% {
-    opacity: 0.3;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.3;
-  }
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
 }
 .spinning .tag-text {
   animation: spinFade 0.8s infinite;
@@ -153,10 +145,8 @@ body {
 
 /* Controls styling */
 .controls {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 .generate-btn {
@@ -169,7 +159,6 @@ body {
   border-radius: 25px;
   font-size: 1.2em;
   cursor: pointer;
-  margin-bottom: 15px;
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 .generate-btn:hover {
@@ -185,7 +174,56 @@ body {
   transition: color 0.3s ease;
 }
 .custom-tags-link:hover {
-  color: #d8954a; /* slightly darker accent */
+  color: #d8954a;
+}
+
+/* Unlock All Icon Button */
+.unlock-container {
+  margin: 15px 0;
+  text-align: center;
+}
+.unlock-all-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.8em;
+  color: #e6ac55;
+  transition: transform 0.2s ease, color 0.3s ease;
+}
+.unlock-all-btn:hover {
+  transform: scale(1.1);
+  color: #d8954a;
+}
+
+/* Genre Groups styling */
+.genre-groups {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 800px;
+}
+.genre-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.genre-group label {
+  font-size: 1em;
+  width: 120px;
+  text-align: right;
+}
+.genre-group input {
+  width: 500px;
+  padding: 5px;
+}
+.genre-group .toggle-group {
+  padding: 5px 10px;
+  border: none;
+  background: linear-gradient(135deg, #e6ac55, #ca8e46);
+  color: #f0f0f0;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 /* Modal Styles */
@@ -200,7 +238,6 @@ body {
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(5px);
 }
-
 .modal-content {
   background-color: #f0f0f0;
   margin: 15% auto;
@@ -213,7 +250,6 @@ body {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
-
 .close-modal {
   position: absolute;
   right: 20px;
@@ -227,7 +263,6 @@ body {
 .close-modal:hover {
   color: #333;
 }
-
 #customTagsInput {
   width: 100%;
   height: 150px;
@@ -242,14 +277,12 @@ body {
   background: #f0f0f0;
   transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
-
 .modal-buttons {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 15px;
 }
-
 .save-tags-btn {
   background: linear-gradient(135deg, #e6ac55, #ca8e46);
   border: none;
@@ -266,7 +299,6 @@ body {
 .save-tags-btn:hover {
   transform: translateY(-2px);
 }
-
 .reset-tags-link {
   color: #666;
   font-size: 0.9em;
@@ -285,77 +317,66 @@ body {
   right: 20px;
   cursor: pointer;
   font-size: 1.8em;
-  color: #e6ac55; /* Accent color */
+  color: #e6ac55;
   transition: transform 0.2s ease, color 0.3s ease;
 }
 .dark-mode-toggle:hover {
   transform: scale(1.1);
 }
 
-/* ========== DARK MODE OVERRIDES ========== */
+/* Dark Mode Overrides */
 body.dark-mode {
   background: #1d1d1d;
   color: #f0f0f0;
 }
-
 body.dark-mode .final-prompt-container {
-  border: none; /* remove border in dark mode */
+  border: none;
   color: #f0f0f0;
 }
-
 body.dark-mode .copy-icon {
   color: #e6ac55;
 }
-
 body.dark-mode .tag-item {
   background: #2d2d2d;
-  border: 1px solid #333; 
+  border: 1px solid #333;
   color: #f0f0f0;
 }
 body.dark-mode .tag-item.locked {
-  background: #3b2c1f; /* darker accent tint */
+  background: #3b2c1f;
 }
-
 body.dark-mode .lock-icon {
   color: #e6ac55;
 }
-
 body.dark-mode .generate-btn {
   background: linear-gradient(135deg, #e6ac55, #ca8e46);
   color: #f0f0f0;
 }
-
 body.dark-mode .custom-tags-link {
   color: #e6ac55;
 }
 body.dark-mode .custom-tags-link:hover {
   color: #d8954a;
 }
-
 body.dark-mode .modal-content {
   background-color: #2d2d2d;
   color: #f0f0f0;
   box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
 }
-
 body.dark-mode .close-modal {
   color: #f0f0f0;
 }
 body.dark-mode .close-modal:hover {
   color: #fff;
 }
-
 body.dark-mode #customTagsInput {
   background: #3b3b3b;
   border-color: #444;
   color: #f0f0f0;
 }
-
 body.dark-mode .save-tags-btn {
   background: linear-gradient(135deg, #e6ac55, #ca8e46);
   color: #f0f0f0;
 }
-
 body.dark-mode .reset-tags-link {
   color: #bbb;
 }
